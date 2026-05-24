@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plan Trip</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Plan Your Dream Trip in Seconds ♡</h2>
+
+  <form action="/plan" method="POST" class="form-card">
+
+    <input name="destination" placeholder="Destination (e.g., Goa)" required>
+
+    <input name="days" placeholder="Number of Days" required>
+
+    <input name="budget" placeholder="Budget (₹)" required>
+
+    <select name="traveller">
+      <option>Solo</option>
+      <option>Couple</option>
+      <option>Family</option>
+      <option>Friends</option>
+    </select>
+
+    <h4>Select Interests</h4>
+
+    <div class="interests">
+
+      <label class="interest-box">
+        <span class="material-icons">restaurant</span>
+        <span>Food</span>
+        <input type="checkbox" name="interests" value="Food">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">park</span>
+        <span>Nature</span>
+        <input type="checkbox" name="interests" value="Nature">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">hiking</span>
+        <span>Adventure</span>
+        <input type="checkbox" name="interests" value="Adventure">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">spa</span>
+        <span>Relaxation</span>
+        <input type="checkbox" name="interests" value="Relaxation">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">museum</span>
+        <span>Culture</span>
+        <input type="checkbox" name="interests" value="Culture">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">shopping_bag</span>
+        <span>Shopping</span>
+        <input type="checkbox" name="interests" value="Shopping">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">terrain</span>
+        <span>Mountains</span>
+        <input type="checkbox" name="interests" value="Mountains">
+      </label>
+
+      <label class="interest-box">
+        <span class="material-icons">local_bar</span>
+        <span>Nightlife</span>
+        <input type="checkbox" name="interests" value="Nightlife">
+      </label>
+
+    </div>
+
+    <button type="submit" class="main-btn">Generate Plan</button>
+
+  </form>
+
+</div>
+<!-- Bottom Nav -->
+<div class="nav">
+
+  <button onclick="location.href='/home'">
+    <span class="material-icons">home</span>
+  </button>
+
+  <button onclick="location.href='/budget'">
+    <span class="material-icons">account_balance_wallet</span>
+  </button>
+
+  <button onclick="location.href='/saved'">
+    <span class="material-icons">bookmark</span>
+  </button>
+
+  <button onclick="location.href='/profile'">
+    <span class="material-icons">person</span>
+  </button>
+
+</div>
+
+</body>
+</html>

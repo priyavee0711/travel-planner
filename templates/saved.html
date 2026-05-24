@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Saved Plans</title>
+
+  <link rel="stylesheet"
+  href="{{ url_for('static', filename='style.css') }}">
+
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <style>
+
+    body{
+      font-family: 'Segoe UI', sans-serif;
+      margin:0;
+    }
+
+    /* 🔙 BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:15px;
+      left:15px;
+      z-index:10;
+    }
+
+    .back-btn a{
+      text-decoration:none;
+      color:var(--mango-popsicle-orange);
+    }
+
+    .back-btn .material-icons{
+      font-size:30px;
+    }
+
+    .container{
+      padding: 60px 18px 80px 18px;
+    }
+
+    h2{
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    /* SMALL PLAN CARD */
+    .saved-box{
+      background: white;
+      padding: 16px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(242, 116, 48, 0.04);
+      border: 1px solid rgba(237, 211, 119, 0.15);
+      transition: 0.2s;
+    }
+
+    .saved-box:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(242, 116, 48, 0.1);
+      border-color: var(--mango-popsicle-orange);
+    }
+
+    .top-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .trip-title{
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--mango-popsicle-orange);
+    }
+
+    .trip-days{
+      color: gray;
+      font-size: 14px;
+    }
+
+    /* BIN BUTTON */
+    .delete-btn{
+      background: var(--mango-popsicle-orange);
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:15px;
+      box-shadow: 0 4px 10px rgba(242, 116, 48, 0.2);
+    }
+
+    .delete-btn:hover{
+      transform: scale(1.08);
+      background: var(--mango-popsicle-primary);
+      box-shadow: 0 4px 10px rgba(242, 185, 73, 0.2);
+    }
+
+    .delete-btn .material-icons{
+      color: white;
+      font-size: 22px;
+    }
+
+    /* HIDDEN DETAILS */
+    .trip-details{
+      display: none;
+      margin-top: 18px;
+      animation: fade 0.3s ease;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform: translateY(8px);
+      }
+
+      to{
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+
+    .day-box{
+      background:#fefdf8;
+      padding:14px;
+      border-radius:14px;
+      margin-bottom:15px;
+      border:1px solid rgba(237, 211, 119, 0.25);
+    }
+
+    .day-title{
+      font-size:18px;
+      font-weight:600;
+      margin-bottom:12px;
+      color: var(--mango-popsicle-orange);
+    }
+
+    .place-box{
+      background:white;
+      padding:12px;
+      border-radius:12px;
+      margin-bottom:10px;
+      border:1px solid rgba(237, 211, 119, 0.15);
+    }
+
+    .place-name{
+      font-size:16px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .small-text{
+      color:#555;
+      font-size:14px;
+      margin:4px 0;
+    }
+
+    .map-btn{
+      display:inline-block;
+      margin-top:8px;
+      padding:8px 14px;
+      border-radius:20px;
+      background:var(--mango-popsicle-orange);
+      color:white;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:600;
+      transition:0.2s;
+    }
+
+    .map-btn:hover{
+      background:var(--mango-popsicle-primary);
+      transform:translateY(-1px);
+    }
+
+    .empty{
+      color: gray;
+      margin-top: 40px;
+      text-align:center;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- 🔙 BACK BUTTON -->
+<div class="back-btn">
+
+  <a href="/home">
+
+    <span class="material-icons">
+      arrow_back
+    </span>
+
+  </a>
+
+</div>
+
+<div class="container">
+
+  <h2>Saved Plans</h2>
+
+  {% if saved_plans %}
+
+    {% for plan in saved_plans %}
+
+      <!-- SAVED PLAN CARD -->
+      <div class="saved-box">
+
+        <div class="top-row"
+             onclick="togglePlan('plan{{ loop.index }}')">
+
+          <div>
+
+            <div class="trip-title">
+              {{ plan.destination }}
+            </div>
+
+            <div class="trip-days">
+              {{ plan.days }} Days Trip
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- FULL PLAN -->
+        <div class="trip-details"
+             id="plan{{ loop.index }}">
+
+          <br>
+
+          {% for day in plan.itinerary %}
+
+            <div class="day-box">
+
+              <div class="day-title">
+                Day {{ day.day }}
+              </div>
+
+              {% for place in day.places %}
+
+                <div class="place-box">
+
+                  <div class="place-name">
+                    {{ place.name }}
+                  </div>
+
+                  <div class="small-text">
+                    🕒 {{ place.time }}
+                  </div>
+
+                  <div class="small-text">
+                    ⭐ {{ place.rating }}
+                  </div>
+
+                  <a href="{{ place.map }}"
+                     target="_blank"
+                     class="map-btn">
+
+                     View Map
+
+                  </a>
+
+                </div>
+
+              {% endfor %}
+
+            </div>
+
+          {% endfor %}
+
+          <!-- DELETE BUTTON -->
+          <a href="/delete-plan/{{ loop.index0 }}">
+
+            <button class="delete-btn">
+
+              <span class="material-icons">
+                delete
+              </span>
+
+            </button>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    {% endfor %}
+
+  {% else %}
+
+    <div class="empty">
+      No saved plans yet.
+    </div>
+
+  {% endif %}
+
+</div>
+
+<script>
+
+function togglePlan(id){
+
+  let plan = document.getElementById(id);
+
+  if(plan.style.display === "block"){
+
+      plan.style.display = "none";
+  }
+
+  else{
+
+      plan.style.display = "block";
+  }
+
+}
+
+</script>
+
+</body>
+</html>

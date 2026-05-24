@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Profile</title>
+
+  <link rel="stylesheet"
+  href="{{ url_for('static', filename='style.css') }}">
+
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <style>
+
+    body{
+      margin:0;
+      background:#faf8f2;
+      font-family:'Segoe UI', sans-serif;
+    }
+
+    /* 🔙 WHITE BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:18px;
+      left:18px;
+      z-index:1000;
+    }
+
+    .back-btn a{
+      text-decoration:none;
+      color:white;
+    }
+
+    .back-btn .material-icons{
+      font-size:32px;
+      color:white;
+    }
+
+    .profile-top{
+      height:220px;
+      background:linear-gradient(135deg, var(--mango-popsicle-orange), var(--mango-popsicle-primary));
+      border-bottom-left-radius:35px;
+      border-bottom-right-radius:35px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      position:relative;
+      box-shadow: 0 4px 20px rgba(242, 116, 48, 0.15);
+    }
+
+    .profile-pic{
+      width:95px;
+      height:95px;
+      border-radius:50%;
+      background:white;
+      color:var(--mango-popsicle-orange);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:45px;
+      margin-bottom:12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .profile-name{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    .profile-email{
+      font-size:14px;
+      opacity:0.8;
+      margin-top:5px;
+    }
+
+    .main-container{
+      padding:18px;
+      padding-bottom:100px;
+      margin-top:-30px;
+    }
+
+    .card{
+      background:white;
+      border-radius:20px;
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:0 4px 14px rgba(242, 116, 48, 0.04);
+      border: 1px solid rgba(237, 211, 119, 0.15);
+    }
+
+    .section-title{
+      font-size:17px;
+      font-weight:600;
+      margin-bottom:15px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .stat-box{
+      background:#fafafa;
+      border-radius:16px;
+      padding:18px;
+      text-align:center;
+      border:1px solid #eee;
+    }
+
+    .stat-number{
+      font-size:24px;
+      font-weight:700;
+      color:var(--mango-popsicle-orange);
+    }
+
+    .stat-label{
+      font-size:13px;
+      color:gray;
+      margin-top:6px;
+    }
+
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      border-bottom:1px solid #f1f1f1;
+    }
+
+    .info-row:last-child{
+      border:none;
+    }
+
+    .left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .left .material-icons{
+      color:var(--mango-popsicle-orange);
+    }
+
+    .info-text{
+      font-size:15px;
+    }
+
+    .right{
+      color:gray;
+      font-size:14px;
+    }
+
+    .edit-btn{
+      width:100%;
+      border:none;
+      padding:14px;
+      border-radius:30px;
+      background:var(--mango-popsicle-orange);
+      color:white;
+      font-size:15px;
+      font-weight: 600;
+      cursor:pointer;
+      transition:0.2s;
+      box-shadow: 0 4px 12px rgba(242, 116, 48, 0.2);
+    }
+
+    .edit-btn:hover{
+      background:var(--mango-popsicle-primary);
+      transform:scale(1.02);
+      box-shadow: 0 4px 12px rgba(242, 185, 73, 0.2);
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- 🔙 BACK BUTTON -->
+<div class="back-btn">
+
+  <a href="/home">
+
+    <span class="material-icons">
+      arrow_back
+    </span>
+
+  </a>
+
+</div>
+
+<!-- TOP PROFILE SECTION -->
+<div class="profile-top">
+
+  <div class="profile-pic">
+
+    <span class="material-icons">
+      person
+    </span>
+
+  </div>
+
+  <!-- 🔥 DYNAMIC USERNAME -->
+  <div class="profile-name">
+    {{ username }}
+  </div>
+
+  <div class="profile-email">
+    travelpartner@gmail.com
+  </div>
+
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-container">
+
+  <!-- STATS -->
+  <div class="card">
+
+    <div class="section-title">
+      Your Activity
+    </div>
+
+    <div class="stats">
+
+      <div class="stat-box">
+
+        <div class="stat-number">
+          {{ saved_count }}
+        </div>
+
+        <div class="stat-label">
+          Saved Trips
+        </div>
+
+      </div>
+
+      <div class="stat-box">
+
+        <div class="stat-number">
+          12
+        </div>
+
+        <div class="stat-label">
+          Places Explored
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TRAVEL DETAILS -->
+  <div class="card">
+
+    <div class="section-title">
+      Travel Preferences
+    </div>
+
+    <div class="info-row">
+
+      <div class="left">
+
+        <span class="material-icons">
+          favorite
+        </span>
+
+        <div class="info-text">
+          Favourite Destination
+        </div>
+
+      </div>
+
+      <div class="right">
+        Goa 🌴
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="left">
+
+        <span class="material-icons">
+          flight_takeoff
+        </span>
+
+        <div class="info-text">
+          Travel Style
+        </div>
+
+      </div>
+
+      <div class="right">
+        Adventure
+      </div>
+
+    </div>
+
+    <div class="info-row">
+
+      <div class="left">
+
+        <span class="material-icons">
+          language
+        </span>
+
+        <div class="info-text">
+          Dream Destination
+        </div>
+
+      </div>
+
+      <div class="right">
+        Switzerland
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🔥 EDIT BUTTON -->
+  <button
+    class="edit-btn"
+    onclick="location.href='/edit-profile'"
+  >
+
+    Edit Profile
+
+  </button>
+
+</div>
+
+</body>
+</html>

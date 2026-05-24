@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trip Plan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span onclick="history.back()" class="back-btn">←</span>
+  <h2>{{ destination }} Trip Plan</h2>
+</div>
+
+<!-- CONTENT -->
+<div class="container" id="tripContent">
+
+{% if itinerary %}
+
+  {% for day in itinerary %}
+  <div class="day-block">
+
+    <div class="day-header">
+      <h3>Day {{ loop.index }}</h3>
+      <span class="day-count">{{ day.places|length }} places</span>
+    </div>
+
+    {% if day.places %}
+
+      {% for place in day.places %}
+      <div class="place-card">
+
+        <!-- NAME -->
+        <h4 class="place-title">📍{{ place.name }}</h4>
+
+        <!-- TIME (clean, no emoji clutter) -->
+        <p class="place-time">{{ place.time }}</p>
+
+        <!-- META -->
+        <div class="place-meta">
+
+          {% if place.type %}
+            <span class="badge">{{ place.type }}</span>
+          {% endif %}
+
+          <span class="badge">⭐ {{ place.rating }}</span>
+
+        </div>
+
+        <!-- MAP -->
+        <a href="{{ place.map }}" target="_blank" class="map-link">
+          Open in Google Maps
+        </a>
+
+      </div>
+
+      <!-- SPACE BETWEEN PLACES -->
+      <div class="gap"></div>
+
+      {% endfor %}
+
+    {% else %}
+      <p class="empty-text">No places available for this day</p>
+    {% endif %}
+
+  </div>
+
+  <!-- SPACE BETWEEN DAYS -->
+  <div class="day-gap"></div>
+
+  {% endfor %}
+
+{% else %}
+  <div class="empty-state">
+    <p>No itinerary generated yet</p>
+  </div>
+{% endif %}
+
+</div>
+
+<!-- SAVE BUTTON -->
+<div class="save-container">
+  <button class="save-btn" onclick="downloadPDF()">
+    Save Plan
+  </button>
+</div>
+
+<!-- PDF LIB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+function downloadPDF() {
+  const element = document.getElementById("tripContent");
+
+  const opt = {
+    margin: 0.4,
+    filename: "{{ destination }}_Trip_Plan.pdf",
+    image: { type: "jpeg", quality: 1 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  };
+
+  html2pdf().set(opt).from(element).save();
+}
+</script>
+
+</body>
+</html>

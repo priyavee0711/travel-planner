@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Partner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="welcome" onclick="goHome()">
+
+<div class="overlay">
+  <div class="welcome-box">
+
+    <!-- Airplane Icon -->
+    <div class="plane">✈</div>
+
+    <h1>Your Travel Partner</h1>
+    <p class="tagline">Plan smarter. Travel better.</p>
+
+  </div>
+</div>
+
+<script>
+function goHome() {
+  window.location.href = "/home";
+}
+</script>
+
+</body>
+</html>

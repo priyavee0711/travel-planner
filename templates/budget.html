@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Budget Tracker</title>
+
+  <link rel="stylesheet"
+  href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+
+  <style>
+
+    body{
+      font-family:'Segoe UI', sans-serif;
+    }
+
+    .alert{
+      background:#ffe5e5;
+      color:#d8000c;
+      padding:12px;
+      margin:12px 0;
+      border-radius:12px;
+      font-size:13px;
+      text-align:center;
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+      margin:15px 0;
+    }
+
+    .summary-box{
+      background:white;
+      padding:15px;
+      border-radius:15px;
+      text-align:center;
+      box-shadow:0 2px 10px rgba(242, 116, 48, 0.04);
+      border: 1px solid rgba(237, 211, 119, 0.2);
+    }
+
+    .summary-box p{
+      font-size:12px;
+      color:gray;
+      margin-bottom:8px;
+    }
+
+    .summary-box h3{
+      font-size:18px;
+      color:var(--mango-popsicle-orange);
+    }
+
+    .expense-card{
+      background:white;
+      padding:15px;
+      border-radius:15px;
+      margin-bottom:12px;
+      box-shadow:0 2px 10px rgba(242, 116, 48, 0.04);
+      border: 1px solid rgba(237, 211, 119, 0.15);
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .expense-name{
+      font-size:15px;
+      font-weight:600;
+    }
+
+    .expense-amount{
+      font-size:15px;
+      color:var(--mango-popsicle-orange);
+      font-weight:600;
+    }
+
+    .nav{
+      position:fixed;
+      bottom:0;
+      width:100%;
+      display:flex;
+      justify-content:space-around;
+      background:white;
+      padding:12px 0;
+      box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav button{
+      border:none;
+      background:none;
+      cursor:pointer;
+    }
+
+    .nav button:hover .material-icons {
+      color: var(--mango-popsicle-orange);
+    }
+
+    .nav .material-icons{
+      font-size:26px;
+      color:#555;
+      transition: 0.2s;
+    }
+
+    .container{
+      padding-bottom:90px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>💰 Budget Tracker</h2>
+
+  <!-- TOTAL BUDGET -->
+  <div class="form-card">
+
+    <label>Total Budget</label>
+
+    <input
+      id="totalBudget"
+      placeholder="Enter Total Budget (₹)"
+    >
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+
+    <div class="summary-box">
+
+      <p>Total Budget</p>
+
+      <h3>
+        ₹<span id="budgetDisplay">0</span>
+      </h3>
+
+    </div>
+
+    <div class="summary-box">
+
+      <p>Spent</p>
+
+      <h3>
+        ₹<span id="spent">0</span>
+      </h3>
+
+    </div>
+
+    <div class="summary-box">
+
+      <p>Remaining</p>
+
+      <h3>
+        ₹<span id="remaining">0</span>
+      </h3>
+
+    </div>
+
+  </div>
+
+  <!-- ALERT -->
+  <div
+    id="alertBox"
+    class="alert"
+    style="display:none;"
+  ></div>
+
+  <!-- ADD EXPENSE -->
+  <div class="form-card">
+
+    <h4>Add Expense</h4>
+
+    <input
+      id="category"
+      placeholder="Category (Food, Travel, Stay)"
+    >
+
+    <input
+      id="amount"
+      placeholder="Amount (₹)"
+    >
+
+    <button
+      onclick="addExpense()"
+      class="main-btn"
+    >
+      Add Expense
+    </button>
+
+  </div>
+
+  <!-- EXPENSE LIST -->
+  <div id="expenseList"></div>
+
+</div>
+
+<!-- NAVBAR -->
+<div class="nav">
+
+  <button onclick="location.href='/home'">
+    <span class="material-icons">
+      home
+    </span>
+  </button>
+
+  <button onclick="location.href='/budget'">
+    <span class="material-icons">
+      account_balance_wallet
+    </span>
+  </button>
+
+  <!-- 🔥 FIXED -->
+  <button onclick="location.href='/saved'">
+    <span class="material-icons">
+      bookmark
+    </span>
+  </button>
+
+  <!-- 🔥 FIXED -->
+  <button onclick="location.href='/profile'">
+    <span class="material-icons">
+      person
+    </span>
+  </button>
+
+</div>
+
+<script>
+
+let totalSpent = 0;
+
+function addExpense(){
+
+  let category =
+  document.getElementById("category").value;
+
+  let amount =
+  Number(document.getElementById("amount").value);
+
+  let totalBudget =
+  Number(document.getElementById("totalBudget").value);
+
+  let alertBox =
+  document.getElementById("alertBox");
+
+  if(!category || !amount || !totalBudget){
+
+    alert("Enter all fields");
+
+    return;
+  }
+
+  totalSpent += amount;
+
+  // UPDATE SUMMARY
+  document.getElementById("budgetDisplay")
+  .innerText = totalBudget;
+
+  document.getElementById("spent")
+  .innerText = totalSpent;
+
+  document.getElementById("remaining")
+  .innerText = totalBudget - totalSpent;
+
+  // ADD EXPENSE CARD
+  let item = `
+
+    <div class="expense-card">
+
+      <div class="expense-name">
+        ${category}
+      </div>
+
+      <div class="expense-amount">
+        ₹${amount}
+      </div>
+
+    </div>
+
+  `;
+
+  document.getElementById("expenseList")
+  .innerHTML += item;
+
+  // ALERTS
+  if(totalSpent > totalBudget){
+
+    alertBox.innerText =
+    "⚠️ Your Budget has been Exceeded!";
+
+    alertBox.style.display = "block";
+  }
+
+  else if(totalSpent >= 0.8 * totalBudget){
+
+    alertBox.innerText =
+    "⚠️ You are nearing your budget limit!";
+
+    alertBox.style.display = "block";
+  }
+
+  else{
+
+    alertBox.style.display = "none";
+  }
+
+  // RESET
+  document.getElementById("category").value = "";
+
+  document.getElementById("amount").value = "";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+/* ===== MANGO POPSICLE COLOR PALETTE ===== */
+:root {
+  --mango-popsicle-primary: #f2b949;
+  --mango-popsicle-creamy: #edd377;
+  --mango-popsicle-bright: #f2e829;
+  --mango-popsicle-orange: #f27430;
+  --mango-popsicle-bg: #faf8f2;
+}
+
+/* ===== RESET / BODY ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(
+              rgba(250, 248, 242, 0.88),
+              rgba(254, 246, 231, 0.92)
+            ),
+            url('/static/homebg.jpg') no-repeat center/cover fixed;
+}
+
+
+/* ===== WELCOME PAGE ===== */
+.welcome {
+  height: 100vh;
+  background: url('/static/homebg.jpg') no-repeat center/cover;
+  cursor: pointer;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-box {
+  text-align: center;
+  color: white;
+  animation: fadeIn 1s ease;
+}
+
+.plane {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.welcome-box h1 {
+  font-size: 36px;
+  letter-spacing: 2px;
+}
+
+.tagline {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+
+/* ===== HOME / CONTAINER ===== */
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+}
+
+
+/* ===== FORM CARD ===== */
+.form-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+input, select {
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 6px 0;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--mango-popsicle-orange);
+  box-shadow: 0 0 0 2px rgba(242, 116, 48, 0.2);
+}
+
+/* Stack top inputs */
+.form-card > input,
+.form-card > select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+/* ===== INTERESTS GRID ===== */
+.interests {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.interest-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.interest-box:hover {
+  background: rgba(242, 185, 73, 0.12);
+  border-color: var(--mango-popsicle-primary);
+}
+
+.interest-box input {
+  margin-left: auto;
+}
+
+.interest-box span {
+  font-size: 13px;
+}
+
+.interest-box .material-icons {
+  font-size: 20px;
+  color: var(--mango-popsicle-orange);
+  transition: 0.2s;
+}
+
+.interest-box:hover .material-icons {
+  color: var(--mango-popsicle-primary);
+}
+
+
+/* ===== BUTTON ===== */
+.main-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 25px;
+  background: var(--mango-popsicle-orange);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  background: var(--mango-popsicle-primary);
+  transform: scale(1.02);
+}
+
+
+/* ===== ITINERARY / CARDS ===== */
+.card {
+  background: white;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card p {
+  font-size: 14px;
+}
+
+
+/* ===== SUMMARY ===== */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.summary-box {
+  flex: 1;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.summary-box p {
+  font-size: 12px;
+  color: #777;
+}
+
+.summary-box h3 {
+  margin-top: 5px;
+}
+
+
+/* ===== ALERT BOX ===== */
+.alert {
+  display: none;
+  background: #ff4d4d;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+
+/* ===== EXPENSE LIST ===== */
+#expenseList {
+  margin-top: 10px;
+}
+
+
+/* ===== NAV BAR ===== */
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 420px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  border-radius: 15px 15px 0 0;
+}
+
+.nav button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.back-btn {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.top-bar h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+
+/* ===== PLAN VIEW ===== */
+.day-block {
+  background: white;
+  margin: 12px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.place-line {
+  margin-bottom: 12px;
+}
+
+.place-title {
+  font-weight: 600;
+  margin: 0;
+}
+
+.time {
+  font-size: 12px;
+  color: #666;
+}
+
+.rating {
+  font-size: 13px;
+  color: #888;
+  margin: 2px 0;
+}
+
+.map-link {
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--mango-popsicle-orange);
+}
+
+
+/* ===== SAVE BUTTON ===== */
+.save-container {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.save-btn {
+  padding: 10px 30px;
+  border-radius: 25px;
+  border: none;
+  background: var(--mango-popsicle-orange);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  background: var(--mango-popsicle-primary);
+  transform: scale(1.02);
+}
+
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.day-block {
+  margin-bottom: 30px;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.day-count {
+  font-size: 12px;
+  color: gray;
+}
+
+.place-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.place-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.place-time {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.place-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.badge {
+  background: rgba(242, 116, 48, 0.08);
+  color: var(--mango-popsicle-orange);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--mango-popsicle-orange);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.map-link:hover {
+  color: var(--mango-popsicle-primary);
+  text-decoration: underline;
+}
+
+/* spacing control */
+.gap {
+  height: 12px;
+}
+
+.day-gap {
+  height: 28px;
+}
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.nav button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.nav button:hover .material-icons {
+  color: var(--mango-popsicle-orange);
+}
+
+.material-icons {
+  font-size: 26px;
+  color: #555;
+  transition: 0.2s;
+}
+
+.delete-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-btn .material-icons{
+    font-size: 20px;
+    color: var(--mango-popsicle-orange);
+    transition: 0.2s;
+}
+
+.delete-btn .material-icons:hover{
+    color: var(--mango-popsicle-primary);
+}
