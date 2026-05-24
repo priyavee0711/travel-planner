@@ -60,9 +60,11 @@ body {
 
 /* ===== HOME / CONTAINER ===== */
 .container {
-  max-width: 420px;
-  margin: auto;
-  padding: 15px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px 100px 16px;
+  box-sizing: border-box;
 }
 
 
@@ -232,16 +234,20 @@ input:focus, select:focus {
 .nav {
   position: fixed;
   bottom: 0;
-  width: 100%;
-  max-width: 420px;
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
   display: flex;
   justify-content: space-around;
-  background: white;
-  padding: 10px 0;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-  border-radius: 15px 15px 0 0;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 12px 0;
+  box-shadow: 0 -4px 20px rgba(242, 116, 48, 0.08);
+  border-top: 1px solid rgba(237, 211, 119, 0.25);
+  border-radius: 18px 18px 0 0;
+  z-index: 1000;
 }
 
 .nav button {
@@ -420,22 +426,7 @@ input:focus, select:focus {
   height: 28px;
 }
 
-.nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  background: white;
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-
-.nav button {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
+/* Centered menu button hovers */
 
 .nav button:hover .material-icons {
   color: var(--mango-popsicle-orange);

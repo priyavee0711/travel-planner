@@ -3,6 +3,7 @@
 <head>
 
   <title>Saved Plans</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet"
   href="{{ url_for('static', filename='style.css') }}">
@@ -35,7 +36,11 @@
     }
 
     .container{
-      padding: 60px 18px 80px 18px;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 60px 16px 100px 16px;
+      box-sizing: border-box;
     }
 
     h2{

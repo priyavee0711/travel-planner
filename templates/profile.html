@@ -3,6 +3,7 @@
 <head>
 
   <title>Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet"
   href="{{ url_for('static', filename='style.css') }}">
@@ -37,6 +38,9 @@
     }
 
     .profile-top{
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
       height:220px;
       background:linear-gradient(135deg, var(--mango-popsicle-orange), var(--mango-popsicle-primary));
       border-bottom-left-radius:35px;
@@ -48,6 +52,7 @@
       color:white;
       position:relative;
       box-shadow: 0 4px 20px rgba(242, 116, 48, 0.15);
+      box-sizing: border-box;
     }
 
     .profile-pic{
@@ -76,9 +81,13 @@
     }
 
     .main-container{
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
       padding:18px;
       padding-bottom:100px;
       margin-top:-30px;
+      box-sizing: border-box;
     }
 
     .card{
@@ -179,21 +188,17 @@
 
 <body>
 
-<!-- 🔙 BACK BUTTON -->
-<div class="back-btn">
-
-  <a href="/home">
-
-    <span class="material-icons">
-      arrow_back
-    </span>
-
-  </a>
-
-</div>
-
 <!-- TOP PROFILE SECTION -->
 <div class="profile-top">
+
+  <!-- 🔙 BACK BUTTON -->
+  <div class="back-btn">
+    <a href="/home">
+      <span class="material-icons">
+        arrow_back
+      </span>
+    </a>
+  </div>
 
   <div class="profile-pic">
 
